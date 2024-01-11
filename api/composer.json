@@ -1,0 +1,55 @@
+{
+    "name": "mikelooper/api-slim-template",
+    "description": "Template to create an API using php-infrastructure",
+    "keywords": ["template"],
+    "homepage": "https://github.com/mikel00per/php-api-slim-template",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "A. Miguel Morillo",
+            "email": "mike@l00per.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ApiSlimTemplate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\ApiSlimTemplate\\": "tests/"
+        },
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {
+        "php": "^8.2",
+        "mikelooper/slim-infrastructure": "^0"
+    },
+    "require-dev": {
+        "mikelooper/code-style": "^0",
+        "phpunit/phpunit": "^10",
+        "vimeo/psalm": "^5"
+    },
+    "scripts": {
+        "test": [
+            "@analyze",
+            "@test:unit"
+        ],
+        "analyze": [
+            "@psalm",
+            "@lint"
+        ],
+        "test:unit": "phpunit --configuration tools/phpunit.xml --no-coverage",
+        "test:coverage": "phpunit --configuration tools/phpunit.xml --coverage-html tmp/coverage",
+        "psalm": "psalm -c tools/psalm.xml",
+        "lint": "ecs check -c tools/ecs.php",
+        "lint:fix": "ecs check --fix -c tools/ecs.php"
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}

@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy env
+        run: cp api/.env.example api/.env
+
+      - name: Run containers
+        run: make run
+
+      - name: Install deps
+        run: sleep 5
+
+      - name: Check tests
+        run: make test
+
+      - name: Check access
+        run: make test-integration
